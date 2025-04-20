@@ -15,18 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from TailTrails.listings import views
-from django.urls import path
+#from listings import views
+from django.urls import path, include
 
 #added for image upload
 from django.conf import settings
 from django.conf.urls.static import static
-from views import listing_post_view
+#from views import listing_post_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('success', success, name='success'),
-    path('post_upload', listing_post_view, name = "post_upload"),
+    #path('success', success, name='success'),
+    #path('post_upload', listing_post_view, name = "post_upload"),
+    path('', include ("listings.urls")),
 ]
 #added for image upload
 if settings.DEBUG:

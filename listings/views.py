@@ -13,7 +13,7 @@ def listing_post_view(request):
             return redirect("success")
     else:
         form = Imageform()
-    return render(request, 'listing_post_form.html', {'form': form})
+    return render(request, 'listing_post_view.html', {'form': form})
 
 def success(request):
     return HttpResponse('successfully posted')
