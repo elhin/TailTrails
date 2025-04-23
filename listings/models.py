@@ -1,44 +1,53 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinLengthValidator, RegexValidator
 
-#WE WILL NEED:
-# a class for lost pets and found pets OR a pets class that has lost/found 
-# statuses that we can use to decide what goes where
-
-
-#held for now just in case
-
-#class Post(models.Model):
-#    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#    title = models.CharField(max_length=200)
-#    text = models.TextField()
-#    created_date = models.DateTimeField(default=timezone.now)
-#    published_date = models.DateTimeField(blank=True, null=True)
-#
-#    def publish(self):
-#        self.published_date = timezone.now()
-#        self.save()
-#
-#    def __str__(self):
-#        return self.title
+class PetPost(models.Model):
+    PET_TYPE_CHOICES = [
+        ('dog', 'Dog'),
+        ('cat', 'Cat'),
+        ('bird', 'Bird'),
+        ('other', 'Other'),
+    ]
     
-class Profile(models.Model):
-    pet_ID = models.AutoField(primary_key=True)
-    pet_name = models.CharField(max_length=50)
-    species = models.CharField(max_length=50)
-    age = models.IntegerField(validators=[
-        MinValueValidator(1), MaxValueValidator(40)])
-    desc = models.TextField(max_length=200)
-    owner_contact = models.TextField(max_length=200)
-    pet_image = models.ImageField(upload_to='images/')
+    STATUS_CHOICES = [
+        ('lost', 'Lost'),
+        ('found', 'Found'),
+    ]
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    status = models.CharField(max_length=5, choices=STATUS_CHOICES)
+    pet_name = models.CharField(max_length=100, blank=True)
+    pet_type = models.CharField(max_length=10, choices=PET_TYPE_CHOICES)
+    breed = models.CharField(max_length=100, blank=True)
+    color = models.CharField(max_length=100)
+    size = models.CharField(max_length=20, blank=True)
+    last_seen_location = models.CharField(max_length=200)
+    last_seen_date = models.DateField()
+    contact_phone = models.CharField(
+        max_length=15,
+        validators=[
+            MinLengthValidator(10),
+            RegexValidator(regex=r'^\+?\d{10,15}$', message="Enter a valid phone number.")
+        ]
+    )
+    contact_email = models.EmailField()
+    description = models.TextField()
+    photo = models.ImageField(upload_to='pet_photos/', blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    is_resolved = models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()
         self.save()
 
     def __str__(self):
-        return self.title
+        return f"{self.get_status_display()} - {self.pet_type.capitalize()}" + \
+               (f" ({self.pet_name})" if self.pet_name else "")
+
+    class Meta:
+        ordering = ['-created_date']
+        verbose_name = "Pet Post"
+        verbose_name_plural = "Pet Posts"
