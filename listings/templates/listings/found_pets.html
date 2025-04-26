@@ -1,0 +1,15 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+  <h1>Found Pets</h1>
+  {% for pet in pets %}
+    <div>
+      <strong>{{ pet.pet_type }}</strong> found near {{ pet.last_seen_location }}<br>
+      Date: {{ pet.last_seen_date }}<br>
+      <p>{{ pet.description }}</p>
+    </div>
+    <hr>
+  {% empty %}
+    <p>No found pets listed yet.</p>
+  {% endfor %}
+{% endblock %}
