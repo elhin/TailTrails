@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 from .models import PetPost
 from .forms import PetPostForm
 
@@ -22,6 +23,7 @@ class PetPostCreateView(CreateView):
     template_name = 'listings/pet_form.html'
     success_url = reverse_lazy('pet-list')
     
+    @login_required
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
