@@ -11,7 +11,7 @@
         <a href="{% url 'found_pets' %}" class="top-menu">Found Pets</a> |
         {% if user.is_authenticated %}
             <a href="{% url 'pet_create' %}" class="top-menu"><span class="glyphicon glyphicon-plus">Create Post</span></a>
-            <p class="top-menu">Hello {{user.username}}<small><a href="{% url 'logout' %}">Log Out</a></small></p>
+            <p class="top-menu">Hello {{user.username}}<small> | <form action="{% url 'logout' %}" method="post"> {% csrf_token %} <button type="submit">Logout</button></form></small></p>
         {% else %}
             <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock">Log In</span></a>
         {% endif %}

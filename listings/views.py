@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import PetPost
 from .forms import PetPostForm
+from django.contrib.auth import logout
 
 class PetPostListView(ListView):
     model = PetPost
@@ -56,3 +57,5 @@ class FoundPetListView(ListView):
 class HomePageView(TemplateView):
     template_name = 'listings/home.html'
 
+def logout_view(request):
+    logout(request)
