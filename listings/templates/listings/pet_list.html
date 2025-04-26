@@ -1,0 +1,17 @@
+{% extends "listings/base.html" %}
+
+{% block content %}
+  <h1>All Pet Posts</h1>
+
+  {% for pet in pets %}
+    <div>
+      <strong>{{ pet.pet_name }}</strong> - {{ pet.pet_type }}<br>
+      Status: {{ pet.status }}<br>
+      Last seen: {{ pet.last_seen_location }} on {{ pet.last_seen_date }}<br>
+      <p>{{ pet.description }}</p>
+      <hr>
+    </div>
+  {% empty %}
+    <p>No pet posts found.</p>
+  {% endfor %}
+{% endblock %}
