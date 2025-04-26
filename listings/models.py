@@ -25,16 +25,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator, MinLeng
 #        return self.title
     
 class Profile(models.Model):
-    pet_ID = models.AutoField(primary_key=True)
-    pet_name = models.CharField(max_length=50)
-    species = models.CharField(max_length=50)
-    age = models.IntegerField(validators=[
-        MinValueValidator(1), MaxValueValidator(40)])
-    desc = models.TextField(max_length=200)
-    owner_contact = models.TextField(max_length=200)
-    pet_image = models.ImageField(upload_to='images/')
+    pet_ID = models.AutoField(primary_key=True)   
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    is_resolved = models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -85,6 +79,13 @@ class Profile(models.Model):
         self.save()
 
     def __str__(self):
+        return f"{self.get_status_display()} - {self.pet_type.capitalize()}" + \
+               (f" ({self.pet_name})" if self.pet_name else "")
+
+    class Meta:
+        ordering = ['-created_date']
+        verbose_name = "Pet Post"
+        verbose_name_plural = "Pet Posts"
         return f"{self.get_status_display()} - {self.pet_type.capitalize()}" + \
                (f" ({self.pet_name})" if self.pet_name else "")
 
