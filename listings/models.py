@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinLengthValidator, RegexValidator
+from django.contrib.auth.models import User
 
 class PetPost(models.Model):
     PET_TYPE_CHOICES = [
@@ -51,3 +52,8 @@ class PetPost(models.Model):
         ordering = ['-created_date']
         verbose_name = "Pet Post"
         verbose_name_plural = "Pet Posts"
+
+#used this to try and get user https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-editing/#models-and-request-user
+class Author(models.Model):
+    name = models.CharField(max_length=200)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)

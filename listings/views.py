@@ -1,10 +1,13 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from .models import PetPost
+from .models import PetPost, Author
 from .forms import PetPostForm, RegisterForm
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+## used this to try and get user https://docs.djangoproject.com/en/5.2/topics/class-based-views/generic-editing/#models-and-request-user
 
 class PetPostListView(ListView):
     model = PetPost
@@ -19,15 +22,15 @@ class PetPostDetailView(DetailView):
     template_name = 'listings/pet_detail.html'
     context_object_name = 'pet'
 
-class PetPostCreateView(CreateView):
+### ADD NEW PET LISTING
+class PetPostCreateView(CreateView, LoginRequiredMixin):
     model = PetPost
     form_class = PetPostForm
     template_name = 'listings/pet_form.html'
     success_url = reverse_lazy('pet-list')
     
-    @login_required
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.created_by = self.request.user        
         return super().form_valid(form)
 
 class PetPostUpdateView(UpdateView):
@@ -72,3 +75,4 @@ def register(response):
         form = RegisterForm()
 
     return render(response, "registration/register.html", {"form":form})
+

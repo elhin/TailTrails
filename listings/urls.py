@@ -13,5 +13,5 @@ urlpatterns = [
     path('post/<int:pk>/edit/', PetPostUpdateView.as_view(), name='pet_update'),
     path('lost/', LostPetListView.as_view(), name='lost_pets'),
     path('found/', FoundPetListView.as_view(), name='found_pets'),
-    path('register/', register.as_view(), name='register')
+    path('register/', register, name='register')
 ]
