@@ -2,8 +2,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, T
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import PetPost
-from .forms import PetPostForm
+from .forms import PetPostForm, RegisterForm
 from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 
 class PetPostListView(ListView):
     model = PetPost
@@ -57,5 +58,17 @@ class FoundPetListView(ListView):
 class HomePageView(TemplateView):
     template_name = 'listings/home.html'
 
+## user/account management stuff
 def logout_view(request):
     logout(request)
+
+def register(response):
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("/pets")
+    else:
+        form = RegisterForm()
+
+    return render(response, "registration/register.html", {"form":form})

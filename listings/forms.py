@@ -1,5 +1,7 @@
 from django import forms
 from .models import PetPost
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class PetPostForm(forms.ModelForm):
     class Meta:
@@ -13,3 +15,11 @@ class PetPostForm(forms.ModelForm):
             'last_seen_date': forms.DateInput(attrs={'type': 'date'}),
             'description': forms.Textarea(attrs={'rows': 4}),
         }
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ["username", 'email', 'password1', 'password2']
+        
