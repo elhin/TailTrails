@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Found Pets</h1>
+  <div class="posts-listing">
   {% for pet in pets %}
     <div>
       {% if pet.photo %}
@@ -17,4 +18,5 @@
   {% empty %}
     <p>No found pets listed yet.</p>
   {% endfor %}
+  </div>
 {% endblock %}

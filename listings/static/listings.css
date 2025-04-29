@@ -1,8 +1,12 @@
-.pet-photo {
+.pet-photo img {
     padding: 5px;
     max-width: 200px;
 }
 
 #pet-image {
-    max-width: 200px;
+    max-width: 100%;
+}
+
+.posts-listing {
+    width: 80%   
 }

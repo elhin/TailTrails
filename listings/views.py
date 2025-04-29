@@ -27,7 +27,7 @@ class PetPostCreateView(CreateView, LoginRequiredMixin):
     model = PetPost
     form_class = PetPostForm
     template_name = 'listings/pet_form.html'
-    success_url = reverse_lazy('pet-list')
+    success_url = reverse_lazy('pet_list')
     
     def form_valid(self, form):
         form.instance.author = self.request.user        
@@ -37,7 +37,7 @@ class PetPostUpdateView(UpdateView):
     model = PetPost
     form_class = PetPostForm
     template_name = 'listings/pet_form.html'
-    success_url = reverse_lazy('pet-list')
+    success_url = reverse_lazy('pet_list')
 
 
 class LostPetListView(ListView):
