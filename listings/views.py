@@ -30,7 +30,7 @@ class PetPostCreateView(CreateView, LoginRequiredMixin):
     success_url = reverse_lazy('pet-list')
     
     def form_valid(self, form):
-        form.instance.created_by = self.request.user        
+        form.instance.author = self.request.user        
         return super().form_valid(form)
 
 class PetPostUpdateView(UpdateView):

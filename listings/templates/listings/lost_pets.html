@@ -5,7 +5,7 @@
   {% for pet in pets %}
     <div>
       {% if pet.photo %}
-      <img alt="Lost Pet" class="pet-photo" src="{{pet.photo.url}}">
+      <img alt="Lost Pet" class="pet-photo" id="pet-image" src="{{pet.photo.url}}">
       {% else %}
       <p>No Photo Attached</p>
       {% endif %}
