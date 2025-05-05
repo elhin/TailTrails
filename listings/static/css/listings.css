@@ -1,0 +1,86 @@
+.pet-photo img {
+    padding: 5px;
+    max-width: 200px;
+}
+
+#pet-image {
+    max-width: 100%;
+}
+
+.posts-listing {
+    width: 80%   
+}
+
+/* fonts, button styles, background */
+
+button {
+    background-color: #230C0F;
+    border: none;
+    color: #D6F49D;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color:#D6F49D;
+    color:#230C0F;
+}
+
+#tailtrailshero {
+    border-radius:5px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    
+}
+
+body {
+    background-color: #A2D3C2;
+}
+
+h1 {
+    font-family: Ubuntu, sans-serif;
+    color: #CBA328;
+}
+
+body, p {
+    font-family: Lora, serif;
+    color: #230C0F;
+}
+
+.posts-listing {
+    font-family: Lora, serif;
+    color: #230C0F;
+}
+
+ul.navigationbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display:flex;
+}
+
+li.top-menu, a.top-menu {
+    text-align: center;
+    padding: 5px;
+    background-color: #230C0F;
+    color:#D6F49D;
+    text-decoration: none;
+    width: 120px;
+
+}
+
+a.top-menu:hover {
+    background-color: #D6F49D;
+    color:#230C0F;
+}
+
+li.top-menu {
+    float: left;
+}
+
+a.top-menu {
+    display:block;
+}

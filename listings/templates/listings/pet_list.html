@@ -5,7 +5,12 @@
 
   {% for pet in pets %}
     <div>
-      <strong>{{ pet.pet_name }}</strong> - {{ pet.pet_type }}<br>
+      {% if pet.photo %}
+      <img alt="Found Pet" class="pet-photo" id="pet-image" src="{{pet.photo.url}}">
+      {% else %}
+      <p>No Photo Attached</p>
+      {% endif %}
+      <br><strong>{{ pet.pet_name }}</strong> - {{ pet.pet_type }}<br>
       Status: {{ pet.status }}<br>
       Last seen: {{ pet.last_seen_location }} on {{ pet.last_seen_date }}<br>
       <p>{{ pet.description }}</p>
