@@ -1,1 +1,4 @@
 Django~=5.1.2
+pillow
+django-crispy-forms~=2.4
+crispy-bootstrap5~=2025.4
