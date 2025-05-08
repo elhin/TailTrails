@@ -1,9 +1,9 @@
-TailTrails
+TailTrails 
 V1.0
-5/8/2025
+(5/8/2025)
 
-Ellyn Hindle
-Kayla Salle
+Ellyn Hindle, 
+Kayla Salle, 
 Alan Emerson
 
 A mock up program for Ivytech Community College's SDEV220 class (fall 2025)
