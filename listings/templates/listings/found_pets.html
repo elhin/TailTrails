@@ -2,9 +2,9 @@
 
 {% block content %}
   <h1>Found Pets</h1>
-  <div class="posts-listing">
+  <div class="posts-container">
   {% for pet in pets %}
-    <div>
+    <div class="post-card">
       {% if pet.photo %}
       <img alt="Found Pet" class="pet-photo" id="pet-image" src="{{pet.photo.url}}">
       {% else %}

@@ -9,29 +9,33 @@
     <title>TailTrails</title>
 </head>
 <body>
-    <div class ="page header">
-        <image id="tailtrailshero" src="../media/images/tailtrailshero.png"></image>
-            <ul class="navigationbar">
-                <li><a href="{% url 'pet_list' %}" class="top-menu">Home</a></li> 
-                <li><a href="{% url 'lost_pets' %}" class="top-menu">Lost Pets</a></li> 
-                <li><a href="{% url 'found_pets' %}" class="top-menu">Found Pets</a></li>
+    <div class ="site-header">
+        <image id="tailtrailshero" alt="Tail Trails Header Image" class="logo" src="https://i.imgur.com/6fK1YvA.png" onerror="noHeader()"></image>
+            <div class="top-bar">
+                <a href="{% url 'pet_list' %}" class="top-menu">Home</a>
+                <a href="{% url 'lost_pets' %}" class="top-menu">Lost Pets</a>
+                <a href="{% url 'found_pets' %}" class="top-menu">Found Pets</a>
             
         {% if user.is_authenticated %}
-            <li><a href="{% url 'pet_create' %}" class="top-menu"><span class="glyphicon glyphicon-plus">Create Post</span></a></li>
-            <li class="top-menu" style="width:300px;color:#CBA328">Hello {{user.username}}!</li> 
-            <li><form action="{% url 'logout' %}" method="post"> {% csrf_token %} <button type="submit">Logout</button></form></li>
-        </ul>
+            <a href="{% url 'pet_create' %}" class="top-menu"><span class="glyphicon glyphicon-plus">Create Post</span></a>
+            Hello {{user.username}}!
+            <form action="{% url 'logout' %}" method="post"> {% csrf_token %} <button type="submit">Logout</button></form>
+        
             {% else %}
-            <li><a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock">Log In</span></a></li>
-            <li><a href="{% url 'register' %}" class="top-menu"><span class="glyphicon glyphicon-lock">Register</span></a></li>
-        </ul>
+            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock">Log In</span></a>
+            <a href="{% url 'register' %}" class="top-menu"><span class="glyphicon glyphicon-lock">Register</span></a>
+        
         {% endif %}
-
+        </div>
     </div>
       
 
     <hr>
-
+<script>
+    function noHeader() {
+        alert("The header image could not be loaded.");
+    }
+</script>
     {% block content %}
     {% endblock %}
 </body>

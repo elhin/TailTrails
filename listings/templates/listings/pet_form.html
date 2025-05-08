@@ -2,9 +2,11 @@
 
 {% block content %}
   <h2>Add a Pet Post</h2>
-  <form method="POST" enctype="multipart/form-data">
+  <div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button class="submit-btn" type="submit">Submit</button>
   </form>
+</div>
 {% endblock %}

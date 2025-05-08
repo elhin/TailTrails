@@ -5,10 +5,11 @@
 
 {% block content %}
   <h1>Lost Pets</h1>
+  <div class="posts-container">
   {% for pet in pets %}
-    <div>
+    <div class="post-card">
       {% if pet.photo %}
-      <img alt="Lost Pet" class="pet-photo" id="pet-image" src="{{pet.photo.url}}">
+      <img alt="Lost Pet" class="pet-photo" src="{{pet.photo.url}}">
       {% else %}
       <p>No Photo Attached</p>
       {% endif %}
@@ -20,4 +21,5 @@
   {% empty %}
     <p>No lost pets listed yet.</p>
   {% endfor %}
+</div>
 {% endblock %}
