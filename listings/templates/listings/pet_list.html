@@ -2,13 +2,11 @@
 
 {% block content %}
   <h1>All Pet Posts</h1>
-
   <div class="posts-container">
-
   {% for pet in pets %}
-      <div class="posts-card">
+    <div class="posts-card">
       {% if pet.photo %}
-      <img alt="Found Pet" class="pet-photo" src="{{pet.photo.url}}">
+      <div class="pet-photo"><img alt="Found Pet" src="{{pet.photo.url}}"></div>
       {% else %}
       <p>No Photo Attached</p>
       {% endif %}
@@ -16,8 +14,15 @@
       Status: {{ pet.status }}<br>
       Last seen: {{ pet.last_seen_location }} on {{ pet.last_seen_date }}<br>
       <p>{{ pet.description }}</p>
+            {% if user.is_authenticated %}
+         <details><summary>Show Contact Info:</summary>
+          <p>Phone: {{ pet.contact_phone}}</p>
+          <p>Email: {{ pet.contact_email}}</p></details>           
+            {% else %}
+            <p>Login to show contact info.</p>        
+        {% endif %}
     </div>
-      <hr>
+    <hr>
     
   {% empty %}
     <p>No pet posts found.</p>
